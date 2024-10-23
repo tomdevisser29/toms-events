@@ -1,0 +1,7 @@
+{
+    "phpcs.standard": "WordPress",
+    "phpcbf.standard": "WordPress",
+    "[php]": {
+        "editor.defaultFormatter": "persoderlind.vscode-phpcbf",
+    }
+}
