@@ -2,7 +2,7 @@
 /**
  * Bootstraps the plugin to set it up for success.
  *
- * @package dev5
+ * @package toms
  */
 
 /**
@@ -10,16 +10,16 @@
  *
  * @return void
  */
-function dev5_events_needs_acf(): void {
+function toms_events_needs_acf(): void {
 	?>
 	<div class="notice notice-warning">
-		<p><?php esc_html_e( 'The dev5 Events plug-in needs the plug-in Advanced Custom Fields to be activated.', 'dev5' ); ?></p>
+		<p><?php esc_html_e( 'The toms Events plug-in needs the plug-in Advanced Custom Fields to be activated.', 'toms' ); ?></p>
 	</div>
 	<?php
 }
 
 if ( ! class_exists( 'acf' ) ) {
-	add_action( 'admin_notices', 'dev5_events_needs_acf', 10, 0 );
+	add_action( 'admin_notices', 'toms_events_needs_acf', 10, 0 );
 }
 
 /**
@@ -27,12 +27,12 @@ if ( ! class_exists( 'acf' ) ) {
  *
  * @return void
  */
-function dev5_events_post_types(): void {
+function toms_events_post_types(): void {
 	register_post_type(
 		'event',
 		array(
-			'label'               => __( 'Event', 'dev5' ),
-			'description'         => __( 'The Event custom post type includes structured data and utilizes a hidden post type to display multiple event dates within a single event overview.', 'dev5' ),
+			'label'               => __( 'Event', 'toms' ),
+			'description'         => __( 'The Event custom post type includes structured data and utilizes a hidden post type to display multiple event dates within a single event overview.', 'toms' ),
 			'public'              => true,
 			'hierarchical'        => false,
 			'exclude_from_search' => false,
@@ -43,7 +43,7 @@ function dev5_events_post_types(): void {
 			'show_in_admin_bar'   => true,
 			'show_in_rest'        => true,
 			'rest_base'           => 'event',
-			'rest_namespace'      => 'dev5',
+			'rest_namespace'      => 'toms',
 			'menu_position'       => null,
 			'menu_icon'           => 'dashicons-calendar',
 			'capability_type'     => 'post',
@@ -57,8 +57,8 @@ function dev5_events_post_types(): void {
 	register_post_type(
 		'event-date',
 		array(
-			'label'               => __( 'Event Date', 'dev5' ),
-			'description'         => __( 'The Event Date custom post type is a hidden post type generated automatically when site editors add dates to an Event post. On the frontend, these dates are linked to their corresponding event.', 'dev5' ),
+			'label'               => __( 'Event Date', 'toms' ),
+			'description'         => __( 'The Event Date custom post type is a hidden post type generated automatically when site editors add dates to an Event post. On the frontend, these dates are linked to their corresponding event.', 'toms' ),
 			'public'              => false,
 			'hierarchical'        => false,
 			'exclude_from_search' => true,
@@ -69,7 +69,7 @@ function dev5_events_post_types(): void {
 			'show_in_admin_bar'   => true,
 			'show_in_rest'        => true,
 			'rest_base'           => 'event-date',
-			'rest_namespace'      => 'dev5',
+			'rest_namespace'      => 'toms',
 			'menu_position'       => null,
 			'menu_icon'           => 'dashicons-calendar',
 			'capability_type'     => 'post',
@@ -80,30 +80,30 @@ function dev5_events_post_types(): void {
 		)
 	);
 }
-add_action( 'init', 'dev5_events_post_types' );
+add_action( 'init', 'toms_events_post_types' );
 
 /**
  * Create the local field groups for the Event and Event Date post types.
  *
  * @return void
  */
-function dev5_events_add_local_field_groups(): void {
+function toms_events_add_local_field_groups(): void {
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_event',
-			'title'                 => __( 'Event', 'dev5' ),
+			'title'                 => __( 'Event', 'toms' ),
 			'fields'                => array(
 				array(
 					'key'          => 'field_event_dates',
 					'name'         => 'event_dates',
-					'label'        => __( 'Dates', 'dev5' ),
+					'label'        => __( 'Dates', 'toms' ),
 					'type'         => 'repeater',
-					'button_label' => __( 'Add new date', 'dev5' ),
+					'button_label' => __( 'Add new date', 'toms' ),
 					'sub_fields'   => array(
 						array(
 							'key'           => 'field_event_dates_date',
 							'name'          => 'date',
-							'label'         => __( 'Date', 'dev5' ),
+							'label'         => __( 'Date', 'toms' ),
 							'type'          => 'date_picker',
 							'return_format' => 'Ymd',
 						),
@@ -129,12 +129,12 @@ function dev5_events_add_local_field_groups(): void {
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_event_date',
-			'title'                 => __( 'Event Date', 'dev5' ),
+			'title'                 => __( 'Event Date', 'toms' ),
 			'fields'                => array(
 				array(
 					'key'           => 'field_event_date',
 					'name'          => 'event_date',
-					'label'         => __( 'Date', 'dev5' ),
+					'label'         => __( 'Date', 'toms' ),
 					'type'          => 'date_picker',
 					'return_format' => 'Ymd',
 					'readonly'      => 1,
@@ -156,4 +156,4 @@ function dev5_events_add_local_field_groups(): void {
 		)
 	);
 }
-add_action( 'acf/init', 'dev5_events_add_local_field_groups' );
+add_action( 'acf/init', 'toms_events_add_local_field_groups' );

@@ -6,7 +6,7 @@
  * this automatically creates, updates, or deletes corresponding Event Date posts.
  * Each Event Date post maintains a reference to its parent Event through post meta.
  *
- * @package dev5
+ * @package toms
  */
 
 /**
